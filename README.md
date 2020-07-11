@@ -52,4 +52,4 @@ Deployment & Sandbox
 
 ### UML
 
-![UML 29](https://raw.githubusercontent.com/401-advanced-javascript-joel/store-front/master/assets/lab-29.png)
+![UML 29](https://raw.githubusercontent.com/401-advanced-javascript-joel/store-front/master/assets/lab-29.jpg)
