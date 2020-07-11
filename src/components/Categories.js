@@ -26,6 +26,7 @@ function Categories(props) {
 
   return (
     <ButtonGroup
+      id='categories'
       variant='text'
       color='secondary'
       aria-label='text primary button group'

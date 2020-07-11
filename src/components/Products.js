@@ -46,7 +46,7 @@ function Products(props) {
   }
 
   return (
-    <Grid container className='products' spacing={5}>
+    <Grid id='products' container className='products' spacing={5}>
       <Grid item xs={12}>
         <Grid container justify='center' spacing={5}>
           {productsHTML}

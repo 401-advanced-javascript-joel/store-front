@@ -276,3 +276,4 @@ const reducer = (state = initState, action) => {
 };
 
 export default createStore(reducer);
+export { reducer };

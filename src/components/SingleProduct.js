@@ -9,8 +9,8 @@ import Typography from '@material-ui/core/Typography';
 
 function SingleProduct(props) {
   return (
-    <Grid item>
-      <Card className='single-product'>
+    <Grid item className='single-product'>
+      <Card>
         <CardMedia
           className='card-image'
           image={props.img}
