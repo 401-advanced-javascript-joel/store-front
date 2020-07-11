@@ -1,0 +1,15 @@
+// 1 Abstracts
+@import 'abstracts/variables';
+
+// 2 Components
+@import 'components/categories';
+@import 'components/current-category';
+@import 'components/products';
+@import 'components/single-product';
+@import 'components/header';
+@import 'components/footer';
+
+.main-content {
+  margin-top: 100px;
+  margin-bottom: 100px;
+}
