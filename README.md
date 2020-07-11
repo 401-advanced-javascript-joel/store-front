@@ -30,13 +30,13 @@ Technical Tasks
 
 Phase 1 (lab 29)
 
-- [PR 29](https://github.com/401-advanced-javascript-joel/store-front/pull/###)
-- [CI/CD](https://github.com/401-advanced-javascript-joel/store-front/pull/###/checks)
+- [PR 29](https://github.com/401-advanced-javascript-joel/store-front/pull/1)
+- [CI/CD](https://github.com/401-advanced-javascript-joel/store-front/pull/1/checks)
+- [CodeSandbox 29](https://codesandbox.io/s/store-front-phase-1-ybooz)
 
 Deployment & Sandbox
 
-- [Netlify](https://###.netlify.app/)
-- [CodeSandbox](https://codesandbox.io/s/###)
+- [Netlify](https://peaceful-curran-96d1bd.netlify.app/)
 
 ### Setup
 
