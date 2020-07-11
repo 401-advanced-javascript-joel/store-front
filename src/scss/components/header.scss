@@ -1,0 +1,14 @@
+.header {
+  & .MuiAppBar-colorPrimary {
+    color: $white;
+    background-color: $primary-color;
+
+    & .header-left {
+      flex-grow: 1;
+    }
+
+    & .header-right {
+      // here if I need it
+    }
+  }
+}
