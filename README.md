@@ -57,7 +57,7 @@ Phase 2 (lab 31)
 
 - [PR 31](https://github.com/401-advanced-javascript-joel/store-front/pull/2)
 - [CI/CD](https://github.com/401-advanced-javascript-joel/store-front/pull/2/checks)
-- [CodeSandbox 31](https://codesandbox.io/s/#)
+- [CodeSandbox 31](https://codesandbox.io/s/https://codesandbox.io/s/store-front-phase-2-m1oyw)
 
 Deployment & Sandbox
 
