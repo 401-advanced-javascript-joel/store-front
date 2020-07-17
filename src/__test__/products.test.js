@@ -18,9 +18,9 @@ describe('Testing Products Component', () => {
     let renderedProducts = component.find(
       '.MuiGrid-root.single-product.MuiGrid-item',
     );
-    let stateProducts = state.products.filter(
-      (product) => product.category === state.currentCategory,
-    );
+    let stateProducts = state.products.products.filter((product) => {
+      return product.category === state.categories.currentCategory;
+    });
     expect(renderedProducts.length).toBe(stateProducts.length);
   });
 });
