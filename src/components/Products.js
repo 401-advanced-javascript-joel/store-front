@@ -8,7 +8,7 @@ function Products(props) {
   function addToCart(product) {
     const action = {
       type: 'ADD_TO_CART',
-      payload: product.name,
+      payload: product,
     };
     props.dispatch(action);
   }
@@ -28,21 +28,24 @@ function Products(props) {
   for (let i = 0; i < filteredProducts.length; i++) {
     let product = filteredProducts[i];
 
-    productsHTML.push(
-      <SingleProduct
-        key={i}
-        name={product.name}
-        img={product.image}
-        description={product.description}
-        price={product.price}
-        add={(e) => {
-          addToCart(filteredProducts[i]);
-        }}
-        view={(e) => {
-          viewDetails(filteredProducts[i]);
-        }}
-      />,
-    );
+    if (product.inStock > 0) {
+      productsHTML.push(
+        <SingleProduct
+          key={i}
+          name={product.name}
+          img={product.image}
+          description={product.description}
+          price={product.price}
+          stock={product.inStock}
+          add={(e) => {
+            addToCart(filteredProducts[i]);
+          }}
+          view={(e) => {
+            viewDetails(filteredProducts[i]);
+          }}
+        />,
+      );
+    }
   }
 
   return (
@@ -57,8 +60,8 @@ function Products(props) {
 }
 
 const mapStateToProps = (state) => ({
-  products: state.products,
-  currentCategory: state.currentCategory,
+  products: state.products.products,
+  currentCategory: state.categories.currentCategory,
 });
 
 export default connect(mapStateToProps)(Products);

@@ -37,7 +37,7 @@ function Categories(props) {
 }
 
 const mapStateToProps = (state) => ({
-  categories: state.categories,
+  categories: state.categories.categories,
 });
 
 export default connect(mapStateToProps)(Categories);
