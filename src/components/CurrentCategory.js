@@ -13,7 +13,7 @@ function CurrentCategory(props) {
 }
 
 const mapStateToProps = (state) => ({
-  currentCategory: state.currentCategory,
+  currentCategory: state.categories.currentCategory,
 });
 
 export default connect(mapStateToProps)(CurrentCategory);

@@ -6,14 +6,14 @@ import App from './App';
 import store from './store';
 
 function Main() {
-    // Wrap our entire application in a provider,
-    // which exposes the store to any descendant
+  // Wrap our entire application in a provider,
+  // which exposes the store to any descendant
 
-    return (
-        <Provider store={store}>
-            <App />
-        </Provider>
-    );
+  return (
+    <Provider store={store}>
+      <App />
+    </Provider>
+  );
 }
 
 const rootElement = document.getElementById('root');

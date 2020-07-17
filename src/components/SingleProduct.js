@@ -20,7 +20,10 @@ function SingleProduct(props) {
           <Typography align='center' variant='h5' component='h2'>
             {props.name}
           </Typography>
-          <Typography align='center' color='textSecondary'>
+          <Typography align='left' color='textSecondary' component='span'>
+            Stock: {props.stock}
+          </Typography>
+          <Typography align='right' color='textSecondary' component='span'>
             ${props.price}.00
           </Typography>
           <Typography variant='body2' component='p'>

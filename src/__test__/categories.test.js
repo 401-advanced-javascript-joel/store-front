@@ -16,10 +16,11 @@ const component = storeContainer.find('#categories');
 describe('Categories Component working as expected', () => {
   test('Should render the right number of buttons', () => {
     let buttons = component.find('button');
-    expect(buttons.length).toBe(state.categories.length);
+    expect(buttons.length).toBe(state.categories.categories.length);
     buttons.forEach((button, i) => {
       let expectedString =
-        state.categories[i].displayName || state.categories.name;
+        state.categories.categories[i].displayName ||
+        state.categories.categories.name;
       expect(button.text()).toBe(expectedString);
     });
   });
@@ -29,7 +30,9 @@ describe('Categories Component working as expected', () => {
     buttons.forEach((button, i) => {
       button.simulate('click');
       let currentState = storeContainer.prop('store').getState();
-      expect(currentState.currentCategory).toBe(state.categories[i].name);
+      expect(currentState.categories.currentCategory).toBe(
+        state.categories.categories[i].name,
+      );
     });
   });
 });
