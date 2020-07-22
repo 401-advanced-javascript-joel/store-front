@@ -3,7 +3,7 @@ export const initCategories = {
   currentCategory: '',
 };
 
-const reducer = (state = initState, action) => {
+const reducer = (state = initCategories, action) => {
   const { type, payload } = action;
 
   switch (type) {
