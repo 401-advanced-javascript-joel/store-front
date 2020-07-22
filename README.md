@@ -89,7 +89,7 @@ Phase 3 (lab 32)
 
 - [PR 32](https://github.com/401-advanced-javascript-joel/store-front/pull/3)
 - [CI/CD 32](https://github.com/401-advanced-javascript-joel/store-front/pull/3/checks)
-- [CodeSandbox 32](https://codesandbox.io/s/#)
+- [CodeSandbox 32](https://codesandbox.io/s/store-front-phase-3-3vjpf)
 
 Deployment & Sandbox
 
