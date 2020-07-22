@@ -1,30 +1,23 @@
-const initState = {
-  categories: [
-    { name: 'electronics', displayName: 'Electronics' },
-    { name: 'food', displayName: 'Food' },
-    { name: 'clothing', displayName: 'Clothing' },
-  ],
-  currentCategory: 'electronics',
+export const initCategories = {
+  categories: [],
+  currentCategory: '',
 };
 
-const reducer = (state, action) => {
-  if (!state) {
-    state = initState;
-  }
-  let newState = { ...state };
+const reducer = (state = initState, action) => {
+  const { type, payload } = action;
 
-  switch (action.type) {
+  switch (type) {
+    case 'GET_CATEGORIES':
+      return {
+        ...state,
+        categories: payload,
+        currentCategory: payload[0].name,
+      };
     case 'SET_CURRENT_CATEGORY':
-      newState.currentCategory = action.payload;
-      break;
-    case 'RESET_STORE':
-      newState = initState;
-      break;
+      return { ...state, currentCategory: payload };
     default:
-      break;
+      return state;
   }
-
-  return newState;
 };
 
 export default reducer;
