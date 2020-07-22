@@ -13,6 +13,9 @@ import DeleteForeverIcon from '@material-ui/icons/DeleteForever';
 import ExitToAppIcon from '@material-ui/icons/ExitToApp';
 import Typography from '@material-ui/core/Typography';
 
+import * as productsActions from '../store/productsActions';
+import * as cartActions from '../store/cartActions';
+
 function Cart(props) {
   const StyledBadge = withStyles(() => ({
     badge: {
@@ -28,7 +31,7 @@ function Cart(props) {
     <div
       className='cart'
       role='presentation'
-      onClick={() => props.dispatch({ type: 'TOGGLE_DRAWER', payload: false })}
+      onClick={() => props.toggleDrawer(false)}
     >
       <List>
         {props.cart.map((product) => {
@@ -43,12 +46,7 @@ function Cart(props) {
                 <IconButton
                   edge='start'
                   color='inherit'
-                  onClick={() =>
-                    props.dispatch({
-                      type: 'REMOVE_FROM_CART',
-                      payload: product,
-                    })
-                  }
+                  onClick={() => props.removeFromCart(product)}
                 >
                   <DeleteForeverIcon />
                 </IconButton>
@@ -68,7 +66,7 @@ function Cart(props) {
       <IconButton
         edge='start'
         color='inherit'
-        onClick={() => props.dispatch({ type: 'TOGGLE_DRAWER', payload: true })}
+        onClick={() => props.toggleDrawer(true)}
       >
         <StyledBadge badgeContent={props.cartCount} color='secondary'>
           <ShoppingCartIcon />
@@ -79,9 +77,7 @@ function Cart(props) {
         <IconButton
           edge='start'
           color='inherit'
-          onClick={() =>
-            props.dispatch({ type: 'TOGGLE_DRAWER', payload: false })
-          }
+          onClick={() => props.toggleDrawer(false)}
         >
           <ExitToAppIcon />
         </IconButton>
@@ -96,4 +92,10 @@ const mapStateToProps = (state) => ({
   drawer: state.cart.drawer,
 });
 
-export default connect(mapStateToProps)(Cart);
+const mapDispatchToProps = (dispatch) => ({
+  toggleDrawer: (payload) => dispatch(cartActions.toggleDrawer(payload)),
+  removeFromCart: (payload) =>
+    dispatch(productsActions.removeFromCart(payload)),
+});
+
+export default connect(mapStateToProps, mapDispatchToProps)(Cart);

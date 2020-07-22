@@ -1,25 +1,24 @@
-import React from 'react';
+import React, { useEffect } from 'react';
 import { connect } from 'react-redux';
 import Grid from '@material-ui/core/Grid';
 import SingleProduct from './SingleProduct';
 
+import * as actions from '../store/productsActions';
+
 function Products(props) {
-  // TODO: define this function
-  function addToCart(product) {
-    const action = {
-      type: 'ADD_TO_CART',
-      payload: product,
-    };
-    props.dispatch(action);
-  }
+  const { getProducts, removeStock, products, currentCategory } = props;
+
+  useEffect(() => {
+    getProducts();
+  }, [getProducts]);
 
   // TODO: define this function
   function viewDetails(product) {}
 
   // get only the products that belong to the current
   // category
-  const filteredProducts = props.products.filter(
-    (product) => product.category === props.currentCategory,
+  const filteredProducts = products.filter(
+    (product) => product.category === currentCategory,
   );
 
   // create the HTML for all filtered products
@@ -38,7 +37,7 @@ function Products(props) {
           price={product.price}
           stock={product.inStock}
           add={(e) => {
-            addToCart(filteredProducts[i]);
+            removeStock(filteredProducts[i]);
           }}
           view={(e) => {
             viewDetails(filteredProducts[i]);
@@ -64,4 +63,9 @@ const mapStateToProps = (state) => ({
   currentCategory: state.categories.currentCategory,
 });
 
-export default connect(mapStateToProps)(Products);
+const mapDispatchToProps = (dispatch) => ({
+  getProducts: () => dispatch(actions.getProducts()),
+  removeStock: (payload) => dispatch(actions.addToCart(payload)),
+});
+
+export default connect(mapStateToProps, mapDispatchToProps)(Products);

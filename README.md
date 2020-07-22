@@ -43,6 +43,32 @@ Technical Tasks
 - Add a “Cart” indicator to the header, like this: Cart (0)
 - Create a new Cart component to show the items in the user’s cart
 
+#### Phase 3 Requirements
+
+In phase 3, we will be connecting our Virtual Store to a live API so that our data is persistent and able to be separately managed.
+
+User Stories
+
+- As a user, I want to interact with live inventory so that I have confidence that the displayed products are in stock
+- As a user, I want to know to that when I add an item to my cart, that it is removed from inventory so that no other users can purchase it
+
+Technical Tasks
+
+- Continue to use Material UI Components for layout and styling
+- Load the category and product list from a remote API on page load.
+- Update the product quantity in stock when adding items to (or removing from) the cart
+- Continue to use multiple reducers
+
+#### Phase 4 Requirements
+
+User Stories
+
+- TBD
+
+Technical Tasks
+
+- TBD
+
 ## Author: Joel Watson
 
 ### Links and Resources
@@ -50,14 +76,20 @@ Technical Tasks
 Phase 1 (lab 29)
 
 - [PR 29](https://github.com/401-advanced-javascript-joel/store-front/pull/1)
-- [CI/CD](https://github.com/401-advanced-javascript-joel/store-front/pull/1/checks)
+- [CI/CD 29](https://github.com/401-advanced-javascript-joel/store-front/pull/1/checks)
 - [CodeSandbox 29](https://codesandbox.io/s/store-front-phase-1-ybooz)
 
 Phase 2 (lab 31)
 
 - [PR 31](https://github.com/401-advanced-javascript-joel/store-front/pull/2)
-- [CI/CD](https://github.com/401-advanced-javascript-joel/store-front/pull/2/checks)
+- [CI/CD 31](https://github.com/401-advanced-javascript-joel/store-front/pull/2/checks)
 - [CodeSandbox 31](https://codesandbox.io/s/store-front-phase-2-m1oyw)
+
+Phase 3 (lab 32)
+
+- [PR 32](https://github.com/401-advanced-javascript-joel/store-front/pull/3)
+- [CI/CD 32](https://github.com/401-advanced-javascript-joel/store-front/pull/3/checks)
+- [CodeSandbox 32](https://codesandbox.io/s/#)
 
 Deployment & Sandbox
 

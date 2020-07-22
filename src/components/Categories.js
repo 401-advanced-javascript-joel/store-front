@@ -1,9 +1,17 @@
-import React from 'react';
+import React, { useEffect } from 'react';
 import { connect } from 'react-redux';
 import Button from '@material-ui/core/Button';
 import ButtonGroup from '@material-ui/core/ButtonGroup';
 
+import * as actions from '../store/categoriesActions';
+
 function Categories(props) {
+  const { getCategories, setCurrentCategory } = props;
+
+  useEffect(() => {
+    getCategories();
+  }, [getCategories]);
+
   let categoryHTML = [];
 
   for (let i = 0; i < props.categories.length; i++) {
@@ -12,11 +20,7 @@ function Categories(props) {
       <Button
         key={i}
         onClick={(e) => {
-          const action = {
-            type: 'SET_CURRENT_CATEGORY',
-            payload: category.name,
-          };
-          props.dispatch(action);
+          setCurrentCategory(category.name);
         }}
       >
         {category.displayName || category.name}
@@ -40,4 +44,10 @@ const mapStateToProps = (state) => ({
   categories: state.categories.categories,
 });
 
-export default connect(mapStateToProps)(Categories);
+const mapDispatchToProps = (dispatch) => ({
+  setCurrentCategory: (payload) =>
+    dispatch(actions.setCurrentCategory(payload)),
+  getCategories: () => dispatch(actions.getCategories()),
+});
+
+export default connect(mapStateToProps, mapDispatchToProps)(Categories);
