@@ -101,9 +101,9 @@ Phase 4 (lab 33)
 
 - [PR 33](https://github.com/401-advanced-javascript-joel/store-front/pull/4)
 - [CI/CD 33](https://github.com/401-advanced-javascript-joel/store-front/pull/4/checks)
-- [CodeSandbox 33](https://codesandbox.io/s/store-front-phase-4-3vjpf)
+- [CodeSandbox 33](https://codesandbox.io/s/store-front-phase-4-4dzh1)
 
-Deployment & Sandbox
+Deployment
 
 - [Netlify](https://peaceful-curran-96d1bd.netlify.app/)
 
