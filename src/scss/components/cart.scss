@@ -1,3 +1,8 @@
 .cart {
   min-width: 250px;
 }
+
+.cart-buttons {
+  display: flex;
+  justify-content: space-evenly;
+}

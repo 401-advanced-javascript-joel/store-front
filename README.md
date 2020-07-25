@@ -61,13 +61,19 @@ Technical Tasks
 
 #### Phase 4 Requirements
 
+In phase 4, we will be completing work on our Virtual Store by adding a two full page views to the application: Product Details and Checkout
+
 User Stories
 
-- TBD
+- As a user, I want to see a full detail view of a product so that I can make a more informed choice about purchasing it.
+- As a user, I want to view my full cart and initiate the checkout process so that I can purchase my items and have them delivered
 
 Technical Tasks
 
-- TBD
+- Add routing to the application
+- Link every product to a page that displays the full product details
+- Link the “Cart” summary in the header to a full shopping cart page with shipping/payment forms
+- Additionally, we will be swapping out our Redux store and replacing it with a store built using Redux Toolkit
 
 ## Author: Joel Watson
 
@@ -91,7 +97,13 @@ Phase 3 (lab 32)
 - [CI/CD 32](https://github.com/401-advanced-javascript-joel/store-front/pull/3/checks)
 - [CodeSandbox 32](https://codesandbox.io/s/store-front-phase-3-3vjpf)
 
-Deployment & Sandbox
+Phase 4 (lab 33)
+
+- [PR 33](https://github.com/401-advanced-javascript-joel/store-front/pull/4)
+- [CI/CD 33](https://github.com/401-advanced-javascript-joel/store-front/pull/4/checks)
+- [CodeSandbox 33](https://codesandbox.io/s/store-front-phase-4-4dzh1)
+
+Deployment
 
 - [Netlify](https://peaceful-curran-96d1bd.netlify.app/)
 

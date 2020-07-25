@@ -3,17 +3,25 @@ import { connect } from 'react-redux';
 import Grid from '@material-ui/core/Grid';
 import SingleProduct from './SingleProduct';
 
-import * as actions from '../store/productsActions';
+import {
+  getProducts,
+  addToCart as removeFromStock,
+} from '../store/products-slice.js';
+import { addToCart } from '../store/cart-slice.js';
 
 function Products(props) {
-  const { getProducts, removeStock, products, currentCategory } = props;
+  const {
+    getProducts,
+    addToCart,
+    removeFromStock,
+    products,
+    processing,
+    currentCategory,
+  } = props;
 
   useEffect(() => {
     getProducts();
   }, [getProducts]);
-
-  // TODO: define this function
-  function viewDetails(product) {}
 
   // get only the products that belong to the current
   // category
@@ -33,14 +41,13 @@ function Products(props) {
           key={i}
           name={product.name}
           img={product.image}
-          description={product.description}
+          productID={product._id}
           price={product.price}
           stock={product.inStock}
+          processing={processing}
           add={(e) => {
-            removeStock(filteredProducts[i]);
-          }}
-          view={(e) => {
-            viewDetails(filteredProducts[i]);
+            removeFromStock(filteredProducts[i]);
+            addToCart(filteredProducts[i]);
           }}
         />,
       );
@@ -60,12 +67,14 @@ function Products(props) {
 
 const mapStateToProps = (state) => ({
   products: state.products.products,
+  processing: state.products.processing,
   currentCategory: state.categories.currentCategory,
 });
 
-const mapDispatchToProps = (dispatch) => ({
-  getProducts: () => dispatch(actions.getProducts()),
-  removeStock: (payload) => dispatch(actions.addToCart(payload)),
-});
+const mapDispatchToProps = {
+  getProducts,
+  removeFromStock,
+  addToCart,
+};
 
 export default connect(mapStateToProps, mapDispatchToProps)(Products);
