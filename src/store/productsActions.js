@@ -14,6 +14,20 @@ const realGetProducts = (payload) => {
   };
 };
 
+export const getOneProduct = (id) => async (dispatch) => {
+  let results = await axios.get(
+    `https://joel-express-server.herokuapp.com/api/v1/products/${id}`,
+  );
+  dispatch(realGetOneProduct(results.data));
+};
+
+const realGetOneProduct = (payload) => {
+  return {
+    type: 'GET_ONE_PRODUCT',
+    payload,
+  };
+};
+
 export const addToCart = (product) => async (dispatch) => {
   let results = await axios.put(
     `https://joel-express-server.herokuapp.com/api/v1/products/${product._id}`,

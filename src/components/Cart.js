@@ -1,22 +1,25 @@
 import React from 'react';
 import { connect } from 'react-redux';
+import { Link } from 'react-router-dom';
 import { withStyles } from '@material-ui/core/styles';
+import Badge from '@material-ui/core/Badge';
 import List from '@material-ui/core/List';
 import ListItem from '@material-ui/core/ListItem';
 import ListItemIcon from '@material-ui/core/ListItemIcon';
 import ListItemText from '@material-ui/core/ListItemText';
+import Typography from '@material-ui/core/Typography';
 import Drawer from '@material-ui/core/Drawer';
-import Badge from '@material-ui/core/Badge';
+import Tooltip from '@material-ui/core/Tooltip';
 import IconButton from '@material-ui/core/IconButton';
-import ShoppingCartIcon from '@material-ui/icons/ShoppingCart';
 import DeleteForeverIcon from '@material-ui/icons/DeleteForever';
 import ExitToAppIcon from '@material-ui/icons/ExitToApp';
-import Typography from '@material-ui/core/Typography';
+import PaymentIcon from '@material-ui/icons/Payment';
+import ShoppingCartIcon from '@material-ui/icons/ShoppingCart';
 
 import * as productsActions from '../store/productsActions';
 import * as cartActions from '../store/cartActions';
 
-function Cart(props) {
+function SimpleCart(props) {
   const StyledBadge = withStyles(() => ({
     badge: {
       right: -3,
@@ -40,22 +43,28 @@ function Cart(props) {
             <ListItem button key={product.name}>
               <ListItemText
                 primary={product.name}
-                secondary={`${product.quantity} x $${product.price}.00`}
+                secondary={'Quantity: ' + product.quantity}
               />
               <ListItemIcon>
-                <IconButton
-                  edge='start'
-                  color='inherit'
-                  onClick={() => props.removeFromCart(product)}
-                >
-                  <DeleteForeverIcon />
-                </IconButton>
+                <Tooltip title='Remove Item'>
+                  <IconButton
+                    edge='start'
+                    color='inherit'
+                    onClick={() => props.removeFromCart(product)}
+                  >
+                    <DeleteForeverIcon />
+                  </IconButton>
+                </Tooltip>
               </ListItemIcon>
             </ListItem>
           );
         })}
         <Typography variant='h5' align='center'>
-          Total: ${total}.00
+          Total:{' '}
+          {new Intl.NumberFormat('en-US', {
+            style: 'currency',
+            currency: 'USD',
+          }).format(total)}
         </Typography>
       </List>
     </div>
@@ -63,24 +72,41 @@ function Cart(props) {
 
   return (
     <React.Fragment key='right'>
-      <IconButton
-        edge='start'
-        color='inherit'
-        onClick={() => props.toggleDrawer(true)}
-      >
-        <StyledBadge badgeContent={props.cartCount} color='secondary'>
-          <ShoppingCartIcon />
-        </StyledBadge>
-      </IconButton>
-      <Drawer anchor={'right'} open={props.drawer}>
-        {list}
+      <Tooltip title='View Cart'>
         <IconButton
           edge='start'
           color='inherit'
-          onClick={() => props.toggleDrawer(false)}
+          onClick={() => props.toggleDrawer(true)}
         >
-          <ExitToAppIcon />
+          <StyledBadge badgeContent={props.cartCount} color='secondary'>
+            <ShoppingCartIcon />
+          </StyledBadge>
         </IconButton>
+      </Tooltip>
+      <Drawer anchor={'right'} open={props.drawer}>
+        {list}
+        <div className='cart-buttons'>
+          <Tooltip title='Checkout'>
+            <IconButton
+              edge='start'
+              color='inherit'
+              onClick={() => props.toggleDrawer(false)}
+              to='/checkout'
+              component={Link}
+            >
+              <PaymentIcon />
+            </IconButton>
+          </Tooltip>
+          <Tooltip title='Close Cart'>
+            <IconButton
+              edge='start'
+              color='inherit'
+              onClick={() => props.toggleDrawer(false)}
+            >
+              <ExitToAppIcon />
+            </IconButton>
+          </Tooltip>
+        </div>
       </Drawer>
     </React.Fragment>
   );
@@ -98,4 +124,4 @@ const mapDispatchToProps = (dispatch) => ({
     dispatch(productsActions.removeFromCart(payload)),
 });
 
-export default connect(mapStateToProps, mapDispatchToProps)(Cart);
+export default connect(mapStateToProps, mapDispatchToProps)(SimpleCart);

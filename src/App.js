@@ -1,25 +1,25 @@
 import React from 'react';
-import CssBaseline from '@material-ui/core/CssBaseline';
-import Container from '@material-ui/core/Container';
+import { BrowserRouter, Route, Switch } from 'react-router-dom';
 
 import './scss/main.scss';
 import Header from './components/Header';
 import Footer from './components/Footer';
-
-import CurrentCategory from './components/CurrentCategory';
-import Products from './components/Products';
-import Cart from './components/Cart';
+import Home from './components/pages/Home';
+import Checkout from './components/pages/Checkout';
+import ProductDetail from './components/pages/ProductDetail';
+import SimpleCart from './components/Cart';
 
 export default function App() {
   return (
-    <CssBaseline>
+    <BrowserRouter>
       <Header />
-      <Cart />
-      <Container maxWidth='lg' className='main-content'>
-        <CurrentCategory />
-        <Products />
-      </Container>
+      <SimpleCart />
+      <Switch>
+        <Route exact path='/' component={Home} />
+        <Route exact path='/products/:id' component={ProductDetail} />
+        <Route exact path='/checkout' component={Checkout} />
+      </Switch>
       <Footer />
-    </CssBaseline>
+    </BrowserRouter>
   );
 }

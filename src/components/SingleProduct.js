@@ -1,4 +1,5 @@
 import React from 'react';
+import { Link } from 'react-router-dom';
 import Grid from '@material-ui/core/Grid';
 import Card from '@material-ui/core/Card';
 import CardActions from '@material-ui/core/CardActions';
@@ -24,17 +25,21 @@ function SingleProduct(props) {
             Stock: {props.stock}
           </Typography>
           <Typography align='right' color='textSecondary' component='span'>
-            ${props.price}.00
-          </Typography>
-          <Typography variant='body2' component='p'>
-            {props.description}
+            {new Intl.NumberFormat('en-US', {
+              style: 'currency',
+              currency: 'USD',
+            }).format(props.price)}
           </Typography>
         </CardContent>
         <CardActions>
           <Button size='small' onClick={props.add}>
             Add To Cart
           </Button>
-          <Button size='small' onClick={props.view}>
+          <Button
+            size='small'
+            component={Link}
+            to={`/products/${props.productID}`}
+          >
             Learn More
           </Button>
         </CardActions>

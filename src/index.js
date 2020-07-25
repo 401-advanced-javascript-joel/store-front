@@ -1,6 +1,7 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
 import { Provider } from 'react-redux';
+import CssBaseline from '@material-ui/core/CssBaseline';
 
 import App from './App';
 import store from './store';
@@ -10,9 +11,11 @@ function Main() {
   // which exposes the store to any descendant
 
   return (
-    <Provider store={store}>
-      <App />
-    </Provider>
+    <CssBaseline>
+      <Provider store={store}>
+        <App />
+      </Provider>
+    </CssBaseline>
   );
 }
 

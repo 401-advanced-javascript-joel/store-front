@@ -1,0 +1,21 @@
+.product-detail {
+  & .card {
+    margin-bottom: 1rem;
+
+    & .card-image {
+      height: 400px;
+    }
+  }
+
+  & button {
+    margin-bottom: 1rem;
+  }
+
+  & .suggestions {
+    margin-bottom: 1rem;
+  }
+
+  & .MuiTypography-alignRight {
+    float: right;
+  }
+}

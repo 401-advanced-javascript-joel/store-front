@@ -6,14 +6,11 @@ import SingleProduct from './SingleProduct';
 import * as actions from '../store/productsActions';
 
 function Products(props) {
-  const { getProducts, removeStock, products, currentCategory } = props;
+  const { getProducts, addToCart, products, currentCategory } = props;
 
   useEffect(() => {
     getProducts();
   }, [getProducts]);
-
-  // TODO: define this function
-  function viewDetails(product) {}
 
   // get only the products that belong to the current
   // category
@@ -33,14 +30,11 @@ function Products(props) {
           key={i}
           name={product.name}
           img={product.image}
-          description={product.description}
+          productID={product._id}
           price={product.price}
           stock={product.inStock}
           add={(e) => {
-            removeStock(filteredProducts[i]);
-          }}
-          view={(e) => {
-            viewDetails(filteredProducts[i]);
+            addToCart(filteredProducts[i]);
           }}
         />,
       );
@@ -65,7 +59,7 @@ const mapStateToProps = (state) => ({
 
 const mapDispatchToProps = (dispatch) => ({
   getProducts: () => dispatch(actions.getProducts()),
-  removeStock: (payload) => dispatch(actions.addToCart(payload)),
+  addToCart: (payload) => dispatch(actions.addToCart(payload)),
 });
 
 export default connect(mapStateToProps, mapDispatchToProps)(Products);

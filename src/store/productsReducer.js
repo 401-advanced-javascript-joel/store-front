@@ -1,5 +1,6 @@
 export const initProducts = {
   products: [],
+  currentProduct: {},
 };
 
 const reducer = (state = initProducts, action) => {
@@ -7,6 +8,8 @@ const reducer = (state = initProducts, action) => {
 
   let atIndex;
   switch (type) {
+    case 'GET_ONE_PRODUCT':
+      return { ...state, currentProduct: payload };
     case 'GET_PRODUCTS':
       return { ...state, products: payload };
     case 'ADD_TO_CART':

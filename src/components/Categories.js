@@ -2,7 +2,6 @@ import React, { useEffect } from 'react';
 import { connect } from 'react-redux';
 import Button from '@material-ui/core/Button';
 import ButtonGroup from '@material-ui/core/ButtonGroup';
-
 import * as actions from '../store/categoriesActions';
 
 function Categories(props) {
@@ -34,6 +33,7 @@ function Categories(props) {
       variant='text'
       color='secondary'
       aria-label='text primary button group'
+      fullWidth
     >
       {categoryHTML}
     </ButtonGroup>
