@@ -16,10 +16,19 @@ import ExitToAppIcon from '@material-ui/icons/ExitToApp';
 import PaymentIcon from '@material-ui/icons/Payment';
 import ShoppingCartIcon from '@material-ui/icons/ShoppingCart';
 
-import * as productsActions from '../store/productsActions';
-import * as cartActions from '../store/cartActions';
+import { removeFromCart as restock } from '../store/products-slice.js';
+import { toggleDrawer, removeFromCart } from '../store/cart-slice.js';
 
 function SimpleCart(props) {
+  const {
+    removeFromCart,
+    restock,
+    toggleDrawer,
+    cart,
+    cartCount,
+    drawer,
+  } = props;
+
   const StyledBadge = withStyles(() => ({
     badge: {
       right: -3,
@@ -31,13 +40,9 @@ function SimpleCart(props) {
 
   let total = 0;
   const list = (
-    <div
-      className='cart'
-      role='presentation'
-      onClick={() => props.toggleDrawer(false)}
-    >
+    <div className='cart' role='presentation'>
       <List>
-        {props.cart.map((product) => {
+        {cart.map((product) => {
           total += product.total;
           return (
             <ListItem button key={product.name}>
@@ -50,7 +55,10 @@ function SimpleCart(props) {
                   <IconButton
                     edge='start'
                     color='inherit'
-                    onClick={() => props.removeFromCart(product)}
+                    onClick={() => {
+                      restock(product);
+                      removeFromCart(product);
+                    }}
                   >
                     <DeleteForeverIcon />
                   </IconButton>
@@ -76,21 +84,21 @@ function SimpleCart(props) {
         <IconButton
           edge='start'
           color='inherit'
-          onClick={() => props.toggleDrawer(true)}
+          onClick={() => toggleDrawer(true)}
         >
-          <StyledBadge badgeContent={props.cartCount} color='secondary'>
+          <StyledBadge badgeContent={cartCount} color='secondary'>
             <ShoppingCartIcon />
           </StyledBadge>
         </IconButton>
       </Tooltip>
-      <Drawer anchor={'right'} open={props.drawer}>
+      <Drawer anchor={'right'} open={drawer}>
         {list}
         <div className='cart-buttons'>
           <Tooltip title='Checkout'>
             <IconButton
               edge='start'
               color='inherit'
-              onClick={() => props.toggleDrawer(false)}
+              onClick={() => toggleDrawer(false)}
               to='/checkout'
               component={Link}
             >
@@ -101,7 +109,7 @@ function SimpleCart(props) {
             <IconButton
               edge='start'
               color='inherit'
-              onClick={() => props.toggleDrawer(false)}
+              onClick={() => toggleDrawer(false)}
             >
               <ExitToAppIcon />
             </IconButton>
@@ -118,10 +126,10 @@ const mapStateToProps = (state) => ({
   drawer: state.cart.drawer,
 });
 
-const mapDispatchToProps = (dispatch) => ({
-  toggleDrawer: (payload) => dispatch(cartActions.toggleDrawer(payload)),
-  removeFromCart: (payload) =>
-    dispatch(productsActions.removeFromCart(payload)),
-});
+const mapDispatchToProps = {
+  toggleDrawer,
+  removeFromCart,
+  restock,
+};
 
 export default connect(mapStateToProps, mapDispatchToProps)(SimpleCart);

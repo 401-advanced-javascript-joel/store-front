@@ -6,9 +6,11 @@ import ListItem from '@material-ui/core/ListItem';
 import ListItemText from '@material-ui/core/ListItemText';
 
 const CheckoutList = (props) => {
+  const { cart } = props;
+
   let total = 0;
   let list = [];
-  props.cart.forEach((product) => {
+  cart.forEach((product) => {
     total += product.total;
     list.push(
       <ListItem key={product._id}>

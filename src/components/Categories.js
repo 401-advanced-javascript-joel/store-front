@@ -2,10 +2,10 @@ import React, { useEffect } from 'react';
 import { connect } from 'react-redux';
 import Button from '@material-ui/core/Button';
 import ButtonGroup from '@material-ui/core/ButtonGroup';
-import * as actions from '../store/categoriesActions';
+import { setCurrentCategory, getCategories } from '../store/categories-slice';
 
 function Categories(props) {
-  const { getCategories, setCurrentCategory } = props;
+  const { getCategories, setCurrentCategory, categories } = props;
 
   useEffect(() => {
     getCategories();
@@ -13,8 +13,8 @@ function Categories(props) {
 
   let categoryHTML = [];
 
-  for (let i = 0; i < props.categories.length; i++) {
-    let category = props.categories[i];
+  for (let i = 0; i < categories.length; i++) {
+    let category = categories[i];
     categoryHTML.push(
       <Button
         key={i}
@@ -44,10 +44,9 @@ const mapStateToProps = (state) => ({
   categories: state.categories.categories,
 });
 
-const mapDispatchToProps = (dispatch) => ({
-  setCurrentCategory: (payload) =>
-    dispatch(actions.setCurrentCategory(payload)),
-  getCategories: () => dispatch(actions.getCategories()),
-});
+const mapDispatchToProps = {
+  setCurrentCategory,
+  getCategories,
+};
 
 export default connect(mapStateToProps, mapDispatchToProps)(Categories);

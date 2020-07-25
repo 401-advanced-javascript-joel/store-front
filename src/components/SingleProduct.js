@@ -32,7 +32,7 @@ function SingleProduct(props) {
           </Typography>
         </CardContent>
         <CardActions>
-          <Button size='small' onClick={props.add}>
+          <Button size='small' disabled={props.processing} onClick={props.add}>
             Add To Cart
           </Button>
           <Button

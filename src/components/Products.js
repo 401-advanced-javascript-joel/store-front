@@ -3,10 +3,21 @@ import { connect } from 'react-redux';
 import Grid from '@material-ui/core/Grid';
 import SingleProduct from './SingleProduct';
 
-import * as actions from '../store/productsActions';
+import {
+  getProducts,
+  addToCart as removeFromStock,
+} from '../store/products-slice.js';
+import { addToCart } from '../store/cart-slice.js';
 
 function Products(props) {
-  const { getProducts, addToCart, products, currentCategory } = props;
+  const {
+    getProducts,
+    addToCart,
+    removeFromStock,
+    products,
+    processing,
+    currentCategory,
+  } = props;
 
   useEffect(() => {
     getProducts();
@@ -33,7 +44,9 @@ function Products(props) {
           productID={product._id}
           price={product.price}
           stock={product.inStock}
+          processing={processing}
           add={(e) => {
+            removeFromStock(filteredProducts[i]);
             addToCart(filteredProducts[i]);
           }}
         />,
@@ -54,12 +67,14 @@ function Products(props) {
 
 const mapStateToProps = (state) => ({
   products: state.products.products,
+  processing: state.products.processing,
   currentCategory: state.categories.currentCategory,
 });
 
-const mapDispatchToProps = (dispatch) => ({
-  getProducts: () => dispatch(actions.getProducts()),
-  addToCart: (payload) => dispatch(actions.addToCart(payload)),
-});
+const mapDispatchToProps = {
+  getProducts,
+  removeFromStock,
+  addToCart,
+};
 
 export default connect(mapStateToProps, mapDispatchToProps)(Products);

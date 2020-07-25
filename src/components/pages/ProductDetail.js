@@ -12,15 +12,27 @@ import AccordionSummary from '@material-ui/core/AccordionSummary';
 import AccordionDetails from '@material-ui/core/AccordionDetails';
 import ExpandMoreIcon from '@material-ui/icons/ExpandMore';
 
-import * as actions from '../../store/productsActions';
+import {
+  getOneProduct,
+  addToCart as removeFromStock,
+} from '../../store/products-slice.js';
+import { addToCart } from '../../store/cart-slice.js';
 
 const ProductDetail = (props) => {
-  const { getOneProduct, addToCart, currentProduct, cart } = props;
+  const {
+    getOneProduct,
+    addToCart,
+    removeFromStock,
+    currentProduct,
+    products,
+    processing,
+  } = props;
   const id = props.match.params.id;
-  const disabled = currentProduct.inStock > 0 ? false : true;
+  const disabled = currentProduct.inStock > 0 && !processing ? false : true;
+
   useEffect(() => {
     getOneProduct(id);
-  }, [getOneProduct, id, cart]);
+  }, [getOneProduct, id, products]);
 
   return (
     <Container maxWidth='sm' className='main-content product-detail'>
@@ -58,7 +70,10 @@ const ProductDetail = (props) => {
         variant='contained'
         color='primary'
         fullWidth
-        onClick={() => addToCart(currentProduct)}
+        onClick={() => {
+          removeFromStock(currentProduct);
+          addToCart(currentProduct);
+        }}
         disabled={disabled}
       >
         Add To Cart
@@ -108,7 +123,7 @@ const ProductDetail = (props) => {
             </AccordionSummary>
             <AccordionDetails>
               <Typography>
-                This TV has all the specs...don't even worry about it.
+                This product has all the specs...don't even worry about it.
               </Typography>
             </AccordionDetails>
           </Accordion>
@@ -121,7 +136,9 @@ const ProductDetail = (props) => {
               <Typography>User Reviews</Typography>
             </AccordionSummary>
             <AccordionDetails>
-              <Typography>This TV was so great! You should buy it.</Typography>
+              <Typography>
+                This product was so great! You should buy it.
+              </Typography>
             </AccordionDetails>
           </Accordion>
         </Grid>
@@ -132,12 +149,14 @@ const ProductDetail = (props) => {
 
 const mapStateToProps = (state) => ({
   currentProduct: state.products.currentProduct,
-  cart: state.cart.cart,
+  products: state.products.products,
+  processing: state.products.processing,
 });
 
-const mapDispatchToProps = (dispatch) => ({
-  getOneProduct: (payload) => dispatch(actions.getOneProduct(payload)),
-  addToCart: (payload) => dispatch(actions.addToCart(payload)),
-});
+const mapDispatchToProps = {
+  getOneProduct,
+  addToCart,
+  removeFromStock,
+};
 
 export default connect(mapStateToProps, mapDispatchToProps)(ProductDetail);

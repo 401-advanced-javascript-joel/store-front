@@ -3,10 +3,11 @@ import { connect } from 'react-redux';
 import Typography from '@material-ui/core/Typography';
 
 function CurrentCategory(props) {
+  const { currentCategory } = props;
   return (
     <div className='current-category'>
       <Typography variant='h2' align='center' gutterBottom>
-        {props.currentCategory.toUpperCase()}
+        {currentCategory.toUpperCase()}
       </Typography>
     </div>
   );
